@@ -127,7 +127,7 @@ CMD = {r'\times': '×', r'\cdot': '·', r'\leqslant': '≤', r'\leq': '≤', r'\
 
 FONT = {'mathrm', 'mathsf', 'textrm', 'text', 'mathtt', 'operatorname', 'mathbf', 'boldsymbol', 'pmb',
         'mathit', 'mathbb', 'mathfrak', 'mathcal', 'mathscr', 'textbf', 'textit', 'texttt', 'mathord', 'mathbin',
-        'mathrel', 'hat', 'dot', 'mbox', 'textsf'}
+        'mathrel', 'mbox', 'textsf'}
 SWITCH = {'tt', 'sf', 'bf', 'rm', 'it', 'cal', 'scriptstyle', 'displaystyle', 'textstyle', 'left', 'right',
           'big', 'Big', 'bigl', 'bigr', 'mathopen', 'mathclose', 'nolimits', 'limits'}
 EXTRA = {'imath': 'i', 'jmath': 'j', 'textmu': 'μ', 'cap': '∩', 'cup': '∪', 'neg': '¬', 'lnot': '¬',
@@ -176,7 +176,7 @@ def tex_simple(t, depth=0):
                 if r is None:
                     return None
                 out.append(r)
-            elif cmd in ('overline', 'bar', 'widetilde', 'tilde'):
+            elif cmd in ('overline', 'bar'):
                 g, i = group(i)
                 r = tex_simple(g, depth + 1)
                 if r is None:
