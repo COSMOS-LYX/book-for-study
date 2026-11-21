@@ -100,9 +100,9 @@ def opf():
 </package>'''
 
 CSS='''@page{margin:0}
-html,body{margin:0;padding:0;background:#fff}
-.page{margin:0;padding:0}
-img{display:block;margin:0;padding:0;width:100%;height:auto}
+html,body{margin:0;padding:0;background:#fff;overflow:hidden}
+.page{margin:0;padding:0;width:100vw;height:100vh}
+img{display:block;margin:0;padding:0;width:100%;height:100%;object-fit:contain}
 '''
 CONTAINER='''<?xml version="1.0" encoding="UTF-8"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/></rootfiles></container>'''
