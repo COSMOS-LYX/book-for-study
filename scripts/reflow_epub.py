@@ -267,6 +267,8 @@ def spans_html(lines, pno, size, do_ocr=True, split_items=False):
         first = ''.join(x.get('content', '') for x in l['spans'][:2])
         if split_items and li and BULLET.match(first):
             parts.append(('br', ''))
+        elif li:
+            parts.append(('nl', ''))
         for s in l['spans']:
             if s['type'] == 'text':
                 t = reocr(pno, s, size) if do_ocr else s.get('content', '')
@@ -283,9 +285,12 @@ def spans_html(lines, pno, size, do_ocr=True, split_items=False):
             out.append(inline_math(v))
         elif k == 'br':
             out.append('\x02')
+        elif k == 'nl':
+            out.append('\x03')
         else:
             out.append(display_math(v))
     h = ''.join(out)
+    h = re.sub(r'(?<=[A-Za-z0-9,.;:!?)])\s*\x03\s*(?=[A-Za-z(])', ' ', h).replace('\x03', '')
     h = re.sub(r'(^|\x02)\s*(?:[●•·▪■◆]|\\bullet|<i>bullet</i>)\s*', r'\1• ', h)
     h = re.sub(r'(^|\x02)\s*[（(]\s*([a-z])\s*[)）]\s*', r'\1(\2) ', h)
     h = re.sub(r'(^|\x02)(\d+\.\d+)(?=[^\d.\s])', r'\1\2 ', h)
